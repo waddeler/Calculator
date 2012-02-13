@@ -16,6 +16,7 @@
 		D01F9A0C14BEB38600573F12 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01F9A0A14BEB38600573F12 /* MainStoryboard.storyboard */; };
 		D01F9A0F14BEB38600573F12 /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D01F9A0E14BEB38600573F12 /* CalculatorViewController.m */; };
 		D08DD4D214BF0CDF0008E9A8 /* CalculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = D08DD4D114BF0CDF0008E9A8 /* CalculatorBrain.m */; };
+		D0F4564C14E96A4B0079E57A /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F4564B14E96A4B0079E57A /* GraphViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,8 @@
 		D01F9A0E14BEB38600573F12 /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
 		D08DD4D014BF0CDF0008E9A8 /* CalculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorBrain.h; sourceTree = "<group>"; };
 		D08DD4D114BF0CDF0008E9A8 /* CalculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorBrain.m; sourceTree = "<group>"; };
+		D0F4564A14E96A4B0079E57A /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
+		D0F4564B14E96A4B0079E57A /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +83,8 @@
 		D01F99FE14BEB38600573F12 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				D0F4564A14E96A4B0079E57A /* GraphViewController.h */,
+				D0F4564B14E96A4B0079E57A /* GraphViewController.m */,
 				D01F9A0714BEB38600573F12 /* CalculatorAppDelegate.h */,
 				D01F9A0814BEB38600573F12 /* CalculatorAppDelegate.m */,
 				D01F9A0A14BEB38600573F12 /* MainStoryboard.storyboard */,
@@ -170,6 +175,7 @@
 				D01F9A0914BEB38600573F12 /* CalculatorAppDelegate.m in Sources */,
 				D01F9A0F14BEB38600573F12 /* CalculatorViewController.m in Sources */,
 				D08DD4D214BF0CDF0008E9A8 /* CalculatorBrain.m in Sources */,
+				D0F4564C14E96A4B0079E57A /* GraphViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
