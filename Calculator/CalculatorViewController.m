@@ -32,6 +32,9 @@
     if (!_brain) _brain = [[CalculatorBrain alloc] init];
     return _brain;
 }
+- (IBAction)GraphButtonPushed {
+    NSLog(@"I got sent over as well");
+}
 
 // instance method that as required iterates through variablesUsedInProgram
 // and creates a string with each variables' current value

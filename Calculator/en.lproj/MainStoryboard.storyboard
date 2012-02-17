@@ -401,7 +401,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="v31-mW-FUc" kind="push" id="O0l-lr-dF7"/>
+                                    <action selector="GraphButtonPushed" destination="2" eventType="touchUpInside" id="L6U-WR-dcp"/>
+                                    <segue destination="v31-mW-FUc" kind="push" identifier="GraphSegue" id="O0l-lr-dF7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -414,7 +415,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="310" y="-60"/>
+            <point key="canvasLocation" x="232" y="-60"/>
         </scene>
         <scene sceneID="cdP-5j-Say">
             <objects>
@@ -423,12 +424,22 @@
                     <view key="view" contentMode="scaleToFill" id="xxt-JS-Z7a">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="eNj-Rg-C5K" customClass="GraphView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Graph" id="s1T-FI-LZN"/>
+                    <connections>
+                        <outlet property="myGraphView" destination="eNj-Rg-C5K" id="jIR-OG-WXh"/>
+                    </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="770" y="-60"/>
+            <point key="canvasLocation" x="705" y="-81"/>
         </scene>
         <scene sceneID="KRX-hk-Xm8">
             <objects>
@@ -448,19 +459,6 @@
             <point key="canvasLocation" x="-216" y="-60"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CalculatorViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="display" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="longDisplay" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="variablesUsedDisplay" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="GraphViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
