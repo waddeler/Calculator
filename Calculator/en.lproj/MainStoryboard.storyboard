@@ -402,7 +402,6 @@
                                 </state>
                                 <connections>
                                     <action selector="GraphButtonPushed" destination="2" eventType="touchUpInside" id="L6U-WR-dcp"/>
-                                    <segue destination="v31-mW-FUc" kind="push" identifier="GraphSegue" id="O0l-lr-dF7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -412,10 +411,11 @@
                     <connections>
                         <outlet property="display" destination="lg7-SX-EGU" id="rU4-iw-pSG"/>
                         <outlet property="longDisplay" destination="ogM-b1-ZeH" id="llQ-uE-Vwy"/>
+                        <segue destination="v31-mW-FUc" kind="push" identifier="GraphSegue" id="HMs-pr-41p"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="232" y="-60"/>
+            <point key="canvasLocation" x="261" y="-60"/>
         </scene>
         <scene sceneID="cdP-5j-Say">
             <objects>
@@ -459,6 +459,25 @@
             <point key="canvasLocation" x="-216" y="-60"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="CalculatorViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="display" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="longDisplay" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="variablesUsedDisplay" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="GraphView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphView.h"/>
+        </class>
+        <class className="GraphViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="myGraphView" candidateClass="GraphView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

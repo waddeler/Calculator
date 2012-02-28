@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GraphViewController.h"
 
-@interface CalculatorViewController : UIViewController
+
+@interface CalculatorViewController : UIViewController  <GraphViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *display;
+@property (nonatomic, weak) GraphViewController *myGraphViewController;
 
 @property (weak, nonatomic) IBOutlet UILabel*longDisplay;
 @property (weak, nonatomic) IBOutlet UILabel *variablesUsedDisplay;

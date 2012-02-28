@@ -7,10 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GraphView.h"       
+#import "GraphView.h"
+@class GraphViewController;
+
+@protocol GraphViewControllerDelegate <NSObject>
+
+-(NSArray *)programForGraphView:(GraphViewController *)sender;
+
+@end
 
 @interface GraphViewController : UIViewController
-@property (nonatomic, weak) IBOutlet GraphView *myGraphView;
-
-
+//@property (nonatomic, weak) IBOutlet GraphView *myGraphView;
+@property (nonatomic, copy) NSArray *localProgram;
+@property (nonatomic, weak) id <GraphViewControllerDelegate> gVCdelegate;//GraphViewController delegate object
+@property (nonatomic) CGFloat yResult;
+//@property (nonatomic) CGFloat yResult;
+//-(CGFloat)yValueForGraphView:(GraphView *)graphView withX:(CGFloat)graph_x;
 @end

@@ -8,6 +8,7 @@
 
 #import "CalculatorViewController.h"
 #import "CalculatorBrain.h"
+#import "GraphViewController.h"
 
 @interface CalculatorViewController()
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
@@ -24,6 +25,8 @@
 @synthesize variablesUsedDisplay = _variablesUsedDisplay;
 @synthesize userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
 @synthesize brain = _brain;
+@synthesize myGraphViewController = _myGraphViewController;  
+
 
 @synthesize decimalPointHasBeenUsed = _decimalPointHasBeenUsed;
 
@@ -33,8 +36,27 @@
     return _brain;
 }
 - (IBAction)GraphButtonPushed {
+    NSArray *localArray = self.brain.program; 
+    NSLog(@"The listing of the program is when graph pressed%@",[localArray componentsJoinedByString:@","]);
     NSLog(@"I got sent over as well");
+    [self performSegueWithIdentifier:@"GraphSegue" sender:self];
+   // [[self.navigationController.viewControllers objectAtIndex:1] setLocalProgram:[localArray copy]];
+    NSLog(@"this is after data sent");
+   // NSLog(@"data is %@",[[self.navigationController.viewControllers objectAtIndex:1] localProgram]);
+
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"GraphSegue"]) {
+        GraphViewController *newController = segue.destinationViewController;
+        newController.gVCdelegate = self;
+        newController.localProgram = [newController.gVCdelegate programForGraphView:newController];
+        //newController.title = [NSString stringWithFormat:@"y = %@",[CalculatorBrain descriptionOfProgram:self.brain.program]];
+    }
+}
+
+
 
 // instance method that as required iterates through variablesUsedInProgram
 // and creates a string with each variables' current value
@@ -201,7 +223,21 @@ if (!self.decimalPointHasBeenUsed) {
     [self updateVariableValuesDisplayed];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:YES];
+    NSLog(@"viewDidDissappear");
+    [[self.navigationController.viewControllers objectAtIndex:1] setLocalProgram:self.brain.program];    
+}
+
+-(NSArray *)programForGraphView:(GraphViewController *)sender
+{
+    return self.brain.program;
+}
+
 - (void)viewDidUnload {
+    NSLog(@"viewDidUnloAD");
+    
     [self setLongDisplay:nil];
     [self setVariablesUsedDisplay:nil];
     [self setVariablesUsedDisplay:nil];
