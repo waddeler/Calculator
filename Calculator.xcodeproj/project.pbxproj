@@ -152,7 +152,7 @@
 		D01F99EB14BEB38600573F12 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Lichfield Mobile Development";
 			};
 			buildConfigurationList = D01F99EE14BEB38600573F12 /* Build configuration list for PBXProject "Calculator" */;
