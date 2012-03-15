@@ -20,16 +20,17 @@
 #define DEFAULT_ORIGIN_X 160.0
 #define DEFAULT_ORIGIN_Y 208.0
 
--(int)scale
+-(double)scale
 {
     if (!_scale) {
         return DEFAULT_SCALE;
     } else {
+       // NSLog(@"scale returned %f",_scale);
         return _scale;
     }
 }
 
--(void)setScale:(int)scale
+-(void)setScale:(double)scale
 {
     if(scale != _scale) {
         _scale = scale;
@@ -143,9 +144,11 @@
 
 -(void)pinch:(UIPinchGestureRecognizer *)pinchRecognizer
 {
-    if ((pinchRecognizer.state == UIGestureRecognizerStateChanged)||
-        (pinchRecognizer.state == UIGestureRecognizerStateEnded)){
-        self.scale *= pinchRecognizer.scale;
+    if ((pinchRecognizer.state == UIGestureRecognizerStateChanged)||(pinchRecognizer.state == UIGestureRecognizerStateEnded)){
+        self.scale *= (pinchRecognizer.scale);
+       //ß NSLog(@"the current pinch is %f", pinchRecognizer.scale);
+        
+        
         pinchRecognizer.scale = 1;
     }
 }

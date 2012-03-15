@@ -12,7 +12,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jud-Gd-gkW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <splitViewController id="b1x-Js-iiy" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="300"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="320" height="600"/>
                     <connections>
                         <segue destination="9fK-JH-5fT" kind="relationship" relationship="masterViewController" id="17B-wQ-XCx"/>
                         <segue destination="i4H-sm-hsl" kind="relationship" relationship="detailViewController" id="Y6k-uW-ELs"/>
@@ -456,7 +456,7 @@
                         <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Calc" id="jrK-IL-JZ2"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="320" height="320"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="320" height="600"/>
                     <connections>
                         <outlet property="display" destination="D17-VT-WZL" id="LaR-yh-D0h"/>
                         <outlet property="longDisplay" destination="AiC-p1-RTk" id="Mo7-4B-QOr"/>
@@ -468,30 +468,6 @@
             <point key="canvasLocation" x="2079" y="35"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CalcView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalcView.h"/>
-        </class>
-        <class className="CalculatorViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="display" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="longDisplay" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="myCalcView" candidateClass="CalcView"/>
-                <relationship kind="outlet" name="variablesUsedDisplay" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="GraphView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphView.h"/>
-        </class>
-        <class className="GraphViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="graphViewToolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="myGraphView" candidateClass="GraphView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

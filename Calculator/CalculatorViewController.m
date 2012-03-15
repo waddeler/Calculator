@@ -252,7 +252,7 @@ if (!self.decimalPointHasBeenUsed) {
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    return YES;
+    return (self.splitViewController)?YES:NO;
 }
 
 - (void)viewDidUnload {

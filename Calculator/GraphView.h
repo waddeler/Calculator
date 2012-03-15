@@ -21,7 +21,7 @@
 @interface GraphView : UIView
 
 @property (nonatomic,weak) id <GraphViewDataSource> dataSource;
-@property (nonatomic) int scale;
+@property (nonatomic) double scale;
 @property (nonatomic) CGPoint graphOrigin;
 // gesture handling methods
 -(void)pan:(UIPanGestureRecognizer *)recognizer;
