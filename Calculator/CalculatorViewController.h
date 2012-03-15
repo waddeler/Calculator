@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "GraphViewController.h"
+#import "CalcView.h"
 
 
 @interface CalculatorViewController : UIViewController  <GraphViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (nonatomic, weak) GraphViewController *myGraphViewController;
+@property (nonatomic,weak) IBOutlet CalcView *myCalcView;
 
 @property (weak, nonatomic) IBOutlet UILabel*longDisplay;
 @property (weak, nonatomic) IBOutlet UILabel *variablesUsedDisplay;

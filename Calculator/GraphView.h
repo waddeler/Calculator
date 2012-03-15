@@ -13,6 +13,7 @@
 @protocol GraphViewDataSource
 -(CGFloat)yValueForGraphView:(GraphView *)graphView withX:(CGFloat)graph_x;
 //@property CGFloat yResult;
+
 @end
 
 
@@ -22,5 +23,8 @@
 @property (nonatomic,weak) id <GraphViewDataSource> dataSource;
 @property (nonatomic) int scale;
 @property (nonatomic) CGPoint graphOrigin;
-
+// gesture handling methods
+-(void)pan:(UIPanGestureRecognizer *)recognizer;
+-(void)pinch:(UIPinchGestureRecognizer *)pinchRecognizer;
+-(void)tripleTap:(UITapGestureRecognizer *)tapRecognizer;
 @end

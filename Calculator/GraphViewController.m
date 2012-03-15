@@ -11,8 +11,8 @@
 #import "CalculatorViewController.h"
 #import "GraphView.h"
 @interface GraphViewController ()<GraphViewDataSource>  //defining that this object complies with GraphViewDataSource protocol
+@property (nonatomic,strong) UIBarButtonItem *graphViewBarButtonItem;
 
-@property (nonatomic, weak) IBOutlet GraphView *myGraphView; //this will be GraphView object that requires GraphViewDatasource
 @end
 
 @implementation GraphViewController
@@ -20,7 +20,71 @@
 @synthesize myGraphView = _myGraphView;
 @synthesize yResult = _yResult;
 @synthesize localProgram =_localProgram;
+@synthesize graphViewToolbar = _graphViewToolbar;
 @synthesize gVCdelegate = _gVCdelegate;
+@synthesize graphViewBarButtonItem = _graphViewBarButtonItem;
+    
+-(void)setGraphViewBarButtonItem:(UIBarButtonItem *)graphViewBarButtonItem
+{
+    NSLog(@"setGraphViewBarButtonItem");
+    if (graphViewBarButtonItem != _graphViewBarButtonItem) {
+        NSMutableArray *toolbarItems = [self.graphViewToolbar.items mutableCopy];
+        if(_graphViewBarButtonItem) [toolbarItems removeObject:_graphViewBarButtonItem];
+        if(graphViewBarButtonItem) [toolbarItems insertObject:graphViewBarButtonItem atIndex:0];
+        self.graphViewToolbar.items = toolbarItems;
+        _graphViewBarButtonItem = graphViewBarButtonItem;
+        
+        
+    }
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    self.splitViewController.delegate = self;
+ //   UIBarButtonItem graphViewBarButtonItem = [[UIBarButtonItem alloc]init ];
+}
+
+-  (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc 
+               inOrientation:(UIInterfaceOrientation)orientation
+
+{
+   // NSLog(@"should hide was called");
+    return UIInterfaceOrientationIsPortrait(orientation);
+}
+
+-(void)splitViewController:(UISplitViewController *)svc 
+    willHideViewController:(UIViewController *)aViewController 
+         withBarButtonItem:(UIBarButtonItem *)barButtonItem 
+      forPopoverController:(UIPopoverController *)pc
+
+{
+    NSLog(@"will Hide is called");
+    barButtonItem.title = @"Calculator";
+    [self setGraphViewBarButtonItem:barButtonItem];
+    // tell the detailview to put this button up
+ //   NSArray *tempArray = [NSArray arrayWithObject:barButtonItem];
+   // [self setToolbarItems:tempArray animated:YES];
+}
+
+-(void)splitViewController:(UISplitViewController *)svc 
+    willShowViewController:(UIViewController *)aViewController 
+ invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem  
+{
+    // tell the detail view to take the button away
+    [self setGraphViewBarButtonItem:nil];
+}
+//-(void)setGraphViewBarButtonItem:(UIBarButtonItem *)barButtonItem
+//{
+  //  NSMutableArray *toolbarItems = [self.graphViewToolbar.items mutableCopy];
+    //if (_graphViewBarButtonItem) [toolbarItems removeObject:_graphViewBarButtonItem];
+    // put the bar button on the left of our existing toolbar
+   // if (barButtonItem) [toolbarItems insertObject:barButtonItem  atIndex:0];
+   // self.graphViewToolbar.items = toolbarItems;
+   // _graphViewBarButtonItem = barButtonItem;    
+//}
+
+
 
 
 -(void)setMyGraphView:(GraphView *)myGraphView
@@ -28,6 +92,19 @@
     _myGraphView = myGraphView;
     self.myGraphView.dataSource = self;
     
+    // adding pan gesture recognizer
+    UIPanGestureRecognizer *myPangr = [[UIPanGestureRecognizer alloc] initWithTarget:myGraphView action:@selector(pan:)];
+    [myGraphView addGestureRecognizer:myPangr];
+    
+    // adding pinch gesture recognizer
+    UIPinchGestureRecognizer *myPinchgr = [[UIPinchGestureRecognizer alloc] initWithTarget:myGraphView action:@selector(pinch:)];
+    [myGraphView addGestureRecognizer:myPinchgr];
+    
+    // adding a triple tap gesture recognizer
+    UITapGestureRecognizer  *tripleTapgr = 
+    [[UITapGestureRecognizer alloc] initWithTarget:myGraphView action:@selector(tripleTap:)];
+    tripleTapgr.numberOfTapsRequired = 3;
+    [myGraphView addGestureRecognizer:tripleTapgr];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -62,9 +139,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"i got called when graph was created");
+  //  NSLog(@"i got called when graph was created");
    // CalculatorViewController *myCalcViewController = [self.navigationController.viewControllers objectAtIndex:0]; 
-    NSLog(@" The description of the program currently loaded is %@", [self.localProgram componentsJoinedByString:@","]);
+   // NSLog(@" The description of the program currently loaded is %@", [self.localProgram componentsJoinedByString:@","]);
    // NSLog(@" The array of the program currentlu loaded is %@",[myCalcViewController self.)
     self.title = [NSString stringWithFormat:@"y = %@",[CalculatorBrain descriptionOfProgram:self.localProgram]];
 }
@@ -104,22 +181,24 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-     NSLog(@" The description of the program currently loaded is %@ and is about to appear", [self.localProgram componentsJoinedByString:@","]);
+    // NSLog(@" The description of the program currently loaded is %@ and is about to appear", [self.localProgram componentsJoinedByString:@","]);
 
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    NSLog(@" The description of the program currently loaded is %@ and did appear", [self.localProgram componentsJoinedByString:@","]);
+    //NSLog(@" The description of the program currently loaded is %@ and did appear", [self.localProgram componentsJoinedByString:@","]);
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    NSLog(@" The description of the program currently loaded is %@ and is about to dissappear", [self.localProgram componentsJoinedByString:@","]);
+   // NSLog(@" The description of the program currently loaded is %@ and is about to dissappear", [self.localProgram componentsJoinedByString:@","]);
 }
 
 - (void)viewDidUnload
 {
+  //  [self setToolbar:nil];
+   // [self setToolbar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -128,7 +207,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 @end

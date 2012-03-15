@@ -16,11 +16,14 @@
 
 @end
 
-@interface GraphViewController : UIViewController
+@interface GraphViewController : UIViewController <UISplitViewControllerDelegate>
 //@property (nonatomic, weak) IBOutlet GraphView *myGraphView;
 @property (nonatomic, copy) NSArray *localProgram;
+@property (weak, nonatomic) IBOutlet UIToolbar *graphViewToolbar;
 @property (nonatomic, weak) id <GraphViewControllerDelegate> gVCdelegate;//GraphViewController delegate object
 @property (nonatomic) CGFloat yResult;
-//@property (nonatomic) CGFloat yResult;
+@property (nonatomic, weak) IBOutlet GraphView *myGraphView;
+
+//this will be GraphView object that requires GraphViewDatasource//@property (nonatomic) CGFloat yResult;
 //-(CGFloat)yValueForGraphView:(GraphView *)graphView withX:(CGFloat)graph_x;
 @end

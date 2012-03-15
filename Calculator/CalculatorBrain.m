@@ -147,7 +147,7 @@
         }
        // [self runProgram:stack usingVaribleValues:myMutableDictionary];
     }
-    NSLog(@"came back");
+   // NSLog(@"came back");
     return [self runProgram:stack usingVaribleValues:myMutableDictionary];
 }
 
@@ -447,26 +447,26 @@
         stack = [program mutableCopy];
     }
     else return 0.0;
-    NSLog(@"my program stack at the start looks like %@", [stack componentsJoinedByString:@" "] );    
+  //  NSLog(@"my program stack at the start looks like %@", [stack componentsJoinedByString:@" "] );    
     NSSet *myVariableSet = [self variablesUsedInProgram:stack];
-    NSLog(@" my variables = %@ ", [[myVariableSet allObjects] componentsJoinedByString:@" "]);
+  //  NSLog(@" my variables = %@ ", [[myVariableSet allObjects] componentsJoinedByString:@" "]);
     int index;                    
     // this loop searches through the program stack for variables 
     // and replaces them with the correct values from the dictionary
     
     for (index = 0; index < stack.count; index++) {
         if ([myVariableSet containsObject:[stack objectAtIndex:index]]) {
-            NSLog(@"match found, index = %d",index);
+           // NSLog(@"match found, index = %d",index);
             [stack replaceObjectAtIndex:index withObject:[variableValues objectForKey:
                 [stack objectAtIndex:index]]];
-            NSLog(@"my program stack looks like %@ in the middle of the loop", [stack componentsJoinedByString:@" "] );
+           // NSLog(@"my program stack looks like %@ in the middle of the loop", [stack componentsJoinedByString:@" "] );
         } // else {
           //  [stack replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:0]];
       //  } These changes made because the line above was erroneously overwriting the last entered operation 
             
     }
     
-    NSLog(@"my program stack looks like %@", [stack componentsJoinedByString:@" "] );
+   // NSLog(@"my program stack looks like %@", [stack componentsJoinedByString:@" "] );
     return [self popOperandOffProgramStack:stack];
 }
 

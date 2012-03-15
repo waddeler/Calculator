@@ -25,7 +25,8 @@
 @synthesize variablesUsedDisplay = _variablesUsedDisplay;
 @synthesize userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
 @synthesize brain = _brain;
-@synthesize myGraphViewController = _myGraphViewController;  
+@synthesize myGraphViewController = _myGraphViewController; 
+@synthesize myCalcView = _myCalcView;
 
 
 @synthesize decimalPointHasBeenUsed = _decimalPointHasBeenUsed;
@@ -35,15 +36,29 @@
     if (!_brain) _brain = [[CalculatorBrain alloc] init];
     return _brain;
 }
-- (IBAction)GraphButtonPushed {
-    NSArray *localArray = self.brain.program; 
-    NSLog(@"The listing of the program is when graph pressed%@",[localArray componentsJoinedByString:@","]);
-    NSLog(@"I got sent over as well");
-    [self performSegueWithIdentifier:@"GraphSegue" sender:self];
-   // [[self.navigationController.viewControllers objectAtIndex:1] setLocalProgram:[localArray copy]];
-    NSLog(@"this is after data sent");
-   // NSLog(@"data is %@",[[self.navigationController.viewControllers objectAtIndex:1] localProgram]);
 
+-(GraphViewController *)splitViewGrapgController
+{
+    id gvc = [self.splitViewController.viewControllers lastObject];
+    if (![gvc isKindOfClass:[GraphViewController class]]) {
+        gvc = nil;
+    }return gvc;
+    
+}
+
+
+- (IBAction)GraphButtonPushed {
+        
+    if ([self splitViewGrapgController]) {
+        [self splitViewGrapgController].gVCdelegate = self;
+        [self splitViewGrapgController].localProgram =
+        [[self splitViewGrapgController].gVCdelegate 
+         programForGraphView:[self splitViewGrapgController]];
+        [[self splitViewGrapgController].myGraphView setNeedsDisplay]; // required because the View already is drawn but needs to update for the graph
+        
+    } else {
+    [self performSegueWithIdentifier:@"GraphSegue" sender:self];
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -226,7 +241,7 @@ if (!self.decimalPointHasBeenUsed) {
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:YES];
-    NSLog(@"viewDidDissappear");
+   // NSLog(@"viewDidDissappear");
     [[self.navigationController.viewControllers objectAtIndex:1] setLocalProgram:self.brain.program];    
 }
 
@@ -235,8 +250,13 @@ if (!self.decimalPointHasBeenUsed) {
     return self.brain.program;
 }
 
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
+
 - (void)viewDidUnload {
-    NSLog(@"viewDidUnloAD");
+   // NSLog(@"viewDidUnloAD");
     
     [self setLongDisplay:nil];
     [self setVariablesUsedDisplay:nil];
