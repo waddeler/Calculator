@@ -5,6 +5,7 @@
 //  Created by Paul Fellows on 14/02/2012.
 //  Copyright (c) 2012 Lichfield Mobile Development. All rights reserved.
 //
+// NB still requires review of draw axis with regards to ipad3
 
 #import "GraphView.h"
 #import "AxesDrawer.h"
