@@ -182,6 +182,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     // NSLog(@" The description of the program currently loaded is %@ and is about to appear", [self.localProgram componentsJoinedByString:@","]);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.myGraphView.scale = [defaults doubleForKey:@"scale"];
+    self.myGraphView.graphOrigin = CGPointMake([defaults floatForKey:@"origin_x"],[defaults floatForKey:@"origin_y"]);
+    
+    
+    
 
 }
 
@@ -192,6 +198,12 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    // create user defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setDouble:self.myGraphView.scale forKey:@"scale"];
+    [defaults setFloat:self.myGraphView.graphOrigin.x forKey:@"origin_x"];
+    [defaults setFloat:self.myGraphView.graphOrigin.y forKey:@"origin_y"];
+    [defaults synchronize];
    // NSLog(@" The description of the program currently loaded is %@ and is about to dissappear", [self.localProgram componentsJoinedByString:@","]);
 }
 

@@ -20,10 +20,19 @@
 #define DEFAULT_ORIGIN_X 160.0
 #define DEFAULT_ORIGIN_Y 208.0
 
+//NSUserDefaults *defaults = [NSUserDefaults ];
+
 -(double)scale
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (!_scale) {
-        return DEFAULT_SCALE;
+        if([defaults doubleForKey:@"scale"] > 0 ) {
+            return [defaults doubleForKey:@"scale"];    
+        }
+        else {
+            return DEFAULT_SCALE;
+        }
+    
     } else {
        // NSLog(@"scale returned %f",_scale);
         return _scale;
@@ -35,13 +44,22 @@
     if(scale != _scale) {
         _scale = scale;
         [self setNeedsDisplay];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setDouble:self.scale forKey:@"scale"];
+        [defaults synchronize];
     }
 }
 
 -(CGPoint)graphOrigin
 {
-    if(_graphOrigin.x == 0&&_graphOrigin.y == 0) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if(_graphOrigin.x == 0&&_graphOrigin.y == 0){
+       if ([defaults floatForKey:@"origin_x"]==0.0 && [defaults floatForKey:@"origin_y"] == 0) {
         return CGPointMake((CGFloat)DEFAULT_ORIGIN_X, (CGFloat)DEFAULT_ORIGIN_Y);
+       } else {
+           return CGPointMake([defaults floatForKey:@"origin_x"],
+                              [defaults floatForKey:@"origin_y"]);
+       }
     } else {
         return _graphOrigin;
     }
@@ -49,10 +67,14 @@
 }
 
 -(void)setGraphOrigin:(CGPoint)graphOrigin
-{
+{   
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (CGPointEqualToPoint(graphOrigin, _graphOrigin)==NO) {
         _graphOrigin = graphOrigin;
         [self setNeedsDisplay];
+        [defaults setFloat:self.graphOrigin.x forKey:@"origin_x"];
+        [defaults setFloat:self.graphOrigin.y forKey:@"origin_y"];
+        [defaults synchronize];
         
     }
 }
@@ -73,6 +95,8 @@
 {
     CGFloat result;
     result = (graphX - self.graphOrigin.x)/(CGFloat)(self.scale * self.contentScaleFactor);
+   // NSLog(@" outbound scale factor is %f",self.contentScaleFactor);
+    
            // (CGFloat)self.scale*self.contentScaleFactor;
     return result;
 }
@@ -84,6 +108,7 @@
 {
     CGFloat roundedY = (CGFloat)roundf(realY*self.scale*self.contentScaleFactor);
     CGFloat result = self.graphOrigin.y - roundedY;//self.contentScaleFactor);
+    //NSLog(@" inbound scale factor is %f",self.contentScaleFactor);
     return result;
 }
 
@@ -158,6 +183,11 @@
     if (tapRecognizer.state == UIGestureRecognizerStateEnded) {
         CGPoint location = [tapRecognizer locationInView:self];
         self.graphOrigin = CGPointMake(location.x, location.y);
+        
+        
     }
 }
+
+
 @end
+
